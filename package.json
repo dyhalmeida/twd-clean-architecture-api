@@ -5,7 +5,9 @@
   "author": "Diego Almeida <diego.almeida@memed.com.br>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^17.0.8",
     "git-commit-msg-linter": "^3.2.8",
-    "gitignore": "^0.7.0"
+    "gitignore": "^0.7.0",
+    "typescript": "^4.5.4"
   }
 }
