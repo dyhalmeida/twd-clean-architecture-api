@@ -4,25 +4,26 @@ import { UserData } from '../../../../usecases/register-user-on-mailing-list/use
 describe('In memory user repository', () => {
   it('should return null if user is not found', async () => {
     const users: UserData[] = []
-    const userRepo = new InMemoryUserRepository(users)
-    const user = await userRepo.findUserByMail('any_mail')
+    const sut = new InMemoryUserRepository(users)
+    const user = await sut.findUserByMail('any_mail')
     expect(user).toBe(null)
   })
 
   it('should return user if it is found in the repository', async () => {
     const users: UserData[] = []
-    const userRepo = new InMemoryUserRepository(users)
-    await userRepo.add({ name: 'any_name', email: 'any_email' })
-    const user = await userRepo.findUserByMail('any_email')
+    const sut = new InMemoryUserRepository(users)
+    await sut.add({ name: 'any_name', email: 'any_email' })
+    const user = await sut.findUserByMail('any_email')
     expect(user).not.toBe(null)
   })
 
   it('should return all users in the repository', async () => {
-    const users: UserData[] = []
-    const userRepo = new InMemoryUserRepository(users)
-    await userRepo.add({ name: 'any_name1', email: 'any_email1' })
-    await userRepo.add({ name: 'any_name2', email: 'any_email2' })
-    const allUsers = await userRepo.findAllUsers()
+    const users: UserData[] = [
+      { name: 'any_name1', email: 'any_email1' },
+      { name: 'any_name2', email: 'any_email2' }
+    ]
+    const sut = new InMemoryUserRepository(users)
+    const allUsers = await sut.findAllUsers()
     expect(allUsers.length).toBeGreaterThan(0)
   })
 })
